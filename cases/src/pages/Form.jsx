@@ -2,6 +2,8 @@ import * as React from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Modal from "@mui/material/Modal";
+import { FormControl, Select } from "@mui/material";
+import { InputLabel, MenuItem } from "@mui/material";
 import { nanoid } from "nanoid";
 import "./style.css";
 const style = {
@@ -10,8 +12,8 @@ const style = {
   left: "50%",
   transform: "translate(-50%, -50%)",
   width: "60%",
-  height:"90%",
-  border:"none",
+  height: "90%",
+  border: "none",
   bgcolor: "background.paper",
   boxShadow: 24,
   p: 4,
@@ -37,7 +39,7 @@ export default function Form(props) {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-        <p className="p">Case</p>
+          <p className="p">Case</p>
           <div className="container">
             <form action="" className="form">
               <div>
@@ -140,6 +142,63 @@ export default function Form(props) {
                   className="forminput"
                   placeholder="Opened Time"
                 />
+                <Box sx={{ width: "100%" }}>
+                  <FormControl
+                    sx={{ m: 1, width: "94%", minHeight: 20 }}
+                    size="small"
+                  >
+                    <InputLabel id="demo-simple-select-label">
+                    source
+                    </InputLabel>
+                    <Select
+                      labelId="demo-simple-select-label"
+                      id="demo-simple-select"
+                      label="value"
+                      onChange={handleChange}
+                    >
+                      <MenuItem
+                        sx={{
+                          fontSize: "13px",
+                        }}
+                        value={"partern"}
+                      >
+                        partern
+                      </MenuItem>
+                      <MenuItem
+                        sx={{
+                          fontSize: "13px",
+                        }}
+                        value={"Dealer Network"}
+                      >
+                        Dealer Network
+                      </MenuItem>
+                      <MenuItem
+                        sx={{
+                          fontSize: "13px",
+                        }}
+                        value={"Local"}
+                      >
+                        Local
+                      </MenuItem>
+                      <MenuItem
+                        sx={{
+                          fontSize: "13px",
+                        }}
+                        value={"Customer"}
+                      >
+                        Customer
+                      </MenuItem>
+                      <MenuItem
+                        sx={{
+                          fontSize: "13px",
+                        }}
+                        value={"Gem Portal Customer"}
+                      >
+                        Gem Portal Customer
+                      </MenuItem>
+                    </Select>
+                  </FormControl>
+                </Box>
                 <input
                   onChange={handleChange}
                   required={true}
@@ -160,15 +219,48 @@ export default function Form(props) {
                   className="forminput"
                   placeholder="Phone"
                 />
-                <input
-                  onChange={handleChange}
-                  required={true}
-                  type="text"
-                  name="Priority"
-                  id=""
-                  className="forminput"
-                  placeholder="Priority"
-                />
+                <Box sx={{ width: "100%" }}>
+                  <FormControl
+                    sx={{ m: 1, width: "94%", minHeight: 20 }}
+                    size="small"
+                  >
+                    <InputLabel id="demo-simple-select-label">
+                    Priority
+                    </InputLabel>
+                    <Select
+                      labelId="demo-simple-select-label"
+                      id="demo-simple-select"
+                      label="value"
+                      onChange={handleChange}
+                    >
+                      <MenuItem
+                        sx={{
+                          fontSize: "13px",
+                        }}
+                        value={"Normal"}
+                      >
+                        Normal
+                      </MenuItem>
+                      <MenuItem
+                        sx={{
+                          fontSize: "13px",
+                        }}
+                        value={"High"}
+                      >
+                        High
+                      </MenuItem>
+                      <MenuItem
+                        sx={{
+                          fontSize: "13px",
+                        }}
+                        value={"Emergency"}
+                      >
+                        Emergency
+                      </MenuItem>
+                    </Select>
+                  </FormControl>
+                </Box>
+                
                 <input
                   onChange={handleChange}
                   required={true}
@@ -196,6 +288,80 @@ export default function Form(props) {
                   className="forminput"
                   placeholder="Status"
                 />
+                <Box sx={{ width: "100%" }}>
+                  <FormControl
+                    sx={{ m: 1, width: "94%", minHeight: 20 }}
+                    size="small"
+                  >
+                    <InputLabel id="demo-simple-select-label">
+                      Product
+                    </InputLabel>
+                    <Select
+                      labelId="demo-simple-select-label"
+                      id="demo-simple-select"
+                      label="value"
+                      onChange={handleChange}
+                    >
+                      <MenuItem
+                        sx={{
+                          fontSize: "13px",
+                        }}
+                        value={"No Product Found"}
+                      >
+                        No Product Found
+                      </MenuItem>
+                    </Select>
+                  </FormControl>
+                </Box>
+                <Box sx={{ width: "100%" }}>
+                  <FormControl
+                    sx={{ m: 1, width: "94%", minHeight: 20 }}
+                    size="small"
+                  >
+                    <InputLabel id="demo-simple-select-label">
+                      Warranty
+                    </InputLabel>
+                    <Select
+                      labelId="demo-simple-select-label"
+                      id="demo-simple-select"
+                      label="value"
+                      onChange={handleChange}
+                    >
+                      <MenuItem
+                        sx={{
+                          fontSize: "13px",
+                        }}
+                        value={"In Warranty"}
+                      >
+                        In Warranty
+                      </MenuItem>
+                      <MenuItem
+                        sx={{
+                          fontSize: "15px",
+                        }}
+                        value={"Out of Warranty"}
+                      >
+                        Out of Warranty
+                      </MenuItem>
+                      <MenuItem
+                        sx={{
+                          fontSize: "15px",
+                        }}
+                        value={"Extended Warranty"}
+                      >
+                        Extended Warranty
+                      </MenuItem>
+                      <MenuItem
+                        sx={{
+                          fontSize: "15px",
+                        }}
+                        value={"AMC Warranty"}
+                      >
+                        AMC Warranty
+                      </MenuItem>
+                    </Select>
+                  </FormControl>
+                </Box>
                 <input
                   onChange={handleChange}
                   required={true}
@@ -247,10 +413,10 @@ export default function Form(props) {
           <Button
             sx={{
               textAlign: "center",
-              border:"1px solid grey",
+              border: "1px solid grey",
               cursor: "pointer",
               marginLeft: "10px",
-              height:"30px",
+              height: "30px",
               color: "rgb(65,65,65)",
               backgroundColor: "rgb(255,255,255)",
             }}
@@ -263,9 +429,9 @@ export default function Form(props) {
               textAlign: "center",
               cursor: "pointer",
               color: "white",
-              height:"30px",
+              height: "30px",
               backgroundColor: "rgb(0,128,0)",
-              marginLeft:"10px"
+              marginLeft: "10px",
             }}
             onClick={(e) => props.getData(e, form)}
           >
