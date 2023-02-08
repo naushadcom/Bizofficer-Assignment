@@ -2,8 +2,9 @@ import * as React from "react";
 import Box from "@mui/material/Box";
 import { DataGrid } from "@mui/x-data-grid";
 import DeleteRoundedIcon from "@mui/icons-material/DeleteRounded";
-import BorderColorSharpIcon from "@mui/icons-material/BorderColorSharp";
+import EditIcon from "@mui/icons-material/Edit";
 import Button from "@mui/material/Button";
+import SearchIcon from "@mui/icons-material/Search";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import InfoSharpIcon from "@mui/icons-material/InfoSharp";
 import CalendarMonthSharpIcon from "@mui/icons-material/CalendarMonthSharp";
@@ -13,7 +14,20 @@ import { Data } from "../pages/Data";
 import Model from "../pages/Model";
 import Form from "../pages/Form";
 const columns = [
-  { field: "id", headerName: "#", width: 90 },
+  {
+    field: "",
+    headerName: "",
+    renderCell: (cellValue) => {
+      return (
+        <input
+          type={"radio"}
+          name="row"
+          style={{ width: "100px", height: "20px"}}
+        ></input>
+      );
+    },
+  },
+  { field: "id", headerName: "#", width: 90},
   {
     field: "Case_number",
     headerName: "Case Number",
@@ -242,13 +256,23 @@ export default function Subheader() {
   const [search, setsearch] = React.useState("");
   const [open, setOpen] = React.useState(false);
   const [openform, setOpenFrom] = React.useState(false);
+  const [openEdit, setOpenEdit] = React.useState(false);
+  const [edit, setEdit] = React.useState(false);
+
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const handleOpenForm = () => setOpenFrom(true);
   const handleCloseForm = () => setOpenFrom(false);
+  const handleOpenEdit= () => setOpenEdit(true);
+  const handleCloseEdit = () => setOpenEdit(false);
 
   const deleteRow = (id) => {
     setdata(data.filter((e) => e.id !== id));
+  };
+
+  const editdata = () => {
+    setEdit(!edit);
+    handleOpenForm();
   };
 
   const searchData = () => {
@@ -290,15 +314,20 @@ export default function Subheader() {
     if (filterdData.length > 0) {
       setdata(filterdData);
     } else {
-      alert("No data");
+      alert("No data is present related to this");
     }
   };
 
   const getData = (e, formdata) => {
     e.preventDefault();
 
-    setdata([...data, formdata]);
-    handleCloseForm();
+    if (formdata !== null) {
+      setdata([...data, formdata]);
+      handleCloseForm();
+      setEdit(false);
+    } else {
+      return;
+    }
   };
   return (
     <Box sx={{ height: 590, width: "100%" }}>
@@ -315,18 +344,33 @@ export default function Subheader() {
         handleClose={handleClose}
         handleOpen={handleOpen}
       ></Model>
-      <div className="select-div" style={{display:"flex",justifyContent:"flex-start"}}>
-        <Option data={channel} lable={"Channels"}></Option>
-        <Option data={caseType} lable={"Type"}></Option>
-        <Option data={status} lable={"Status"}></Option>
-        <Option data={cases} lable={"Cases"}></Option>
+      <div
+        className="select-div"
+        style={{ display: "flex", justifyContent: "flex-start" }}
+      >
+        <Option data={channel} lable={"All Channels"}></Option>
+        <Option data={caseType} lable={"All Case Type"}></Option>
+        <Option data={status} lable={"All Status"}></Option>
+        <Option data={cases} lable={"All Cases"}></Option>
+
         <input
-		style={{height:"35px",width:"250px",margin:"10px",border:"1.3px solid grey",borderRadius:"2px"}}
+          style={{
+            height: "33px",
+            width: "250px",
+            margin: "10px",
+            border: "1.3px solid grey",
+            borderRadius: "2px",
+            marginRight: "20px",
+          }}
           type="text"
           className="search"
+          placeholder="search"
           onChange={(e) => {
             setsearch(e.target.value);
           }}
+        ></input>
+        <SearchIcon
+          style={{ marginTop: "15px", marginLeft: "-45px", color: "grey" }}
         />
         <Button
           variant="contained"
@@ -342,7 +386,14 @@ export default function Subheader() {
         >
           Search
         </Button>
-        <div className="icons" style={{display:"flex",justifyContent:"space-around",gap:"1rem"}}>
+        <div
+          className="icons"
+          style={{
+            display: "flex",
+            justifyContent: "space-around",
+            gap: "1rem",
+          }}
+        >
           <TableChartSharpIcon
             sx={{
               height: 50,
@@ -370,14 +421,15 @@ export default function Subheader() {
           ></AddCircleIcon>
           {OneData !== 0 ? (
             <>
-              <BorderColorSharpIcon
+              <EditIcon
+                onClick={() => editdata(OneData.id)}
                 sx={{
                   height: 50,
                   textAlign: "center",
                   cursor: "pointer",
                   color: "rgb(25,118,210)",
                 }}
-              ></BorderColorSharpIcon>
+              ></EditIcon>
               <DeleteRoundedIcon
                 onClick={() => deleteRow(OneData.id)}
                 sx={{
@@ -404,7 +456,6 @@ export default function Subheader() {
       <DataGrid
         rows={data}
         columns={columns}
-        checkboxSelection
         onCellClick={(e) => setOneData(e.row)}
         sx={{ fontSize: 11, textAlign: "left" }}
         experimentalFeatures={{ newEditingApi: true }}

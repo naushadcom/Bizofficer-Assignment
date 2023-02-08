@@ -3,12 +3,15 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Modal from "@mui/material/Modal";
 import { nanoid } from "nanoid";
+import "./style.css";
 const style = {
   position: "absolute",
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  width: "85%",
+  width: "60%",
+  height:"90%",
+  border:"none",
   bgcolor: "background.paper",
   boxShadow: 24,
   p: 4,
@@ -34,6 +37,7 @@ export default function Form(props) {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
+        <p className="p">Case</p>
           <div className="container">
             <form action="" className="form">
               <div>
@@ -240,29 +244,32 @@ export default function Form(props) {
               </div>
             </form>
           </div>
-
           <Button
             sx={{
               textAlign: "center",
+              border:"1px solid grey",
               cursor: "pointer",
-              color: "white",
-              backgroundColor: "rgb(25,118,210)",
+              marginLeft: "10px",
+              height:"30px",
+              color: "rgb(65,65,65)",
+              backgroundColor: "rgb(255,255,255)",
             }}
-            onClick={(e) => props.getData(e, form)}
+            onClick={props.handleCloseForm}
           >
-            Submit
+            Cancel
           </Button>
           <Button
             sx={{
               textAlign: "center",
               cursor: "pointer",
-              marginLeft: "10px",
               color: "white",
-              backgroundColor: "rgb(25,118,210)",
+              height:"30px",
+              backgroundColor: "rgb(0,128,0)",
+              marginLeft:"10px"
             }}
-            onClick={props.handleCloseForm}
+            onClick={(e) => props.getData(e, form)}
           >
-            Cancel
+            Save
           </Button>
         </Box>
       </Modal>

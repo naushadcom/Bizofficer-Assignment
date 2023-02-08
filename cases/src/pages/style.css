@@ -1,0 +1,51 @@
+.container1 > div{
+    display: flex;
+    width: 50%;
+}
+
+
+.spantwo{
+   text-align: left;
+}
+
+.keydiv{
+    width: 25%;
+
+}
+
+.valuediv{
+    width: 45%;
+}
+
+
+/* ----------------------------------------- */
+
+
+form > div{
+    width: 50%;
+    
+    
+}
+
+.container{
+    margin-top: -40px;
+}
+form{
+    display: flex;
+    justify-content:space-between
+
+}
+.p{
+    position: relative;
+    bottom: 5%;
+    margin-left: 10px;
+}
+
+.forminput{
+    height: 35px;
+    width: 90%;
+    margin: 5px;
+    border: 1.3px solid rgb(203,203,203);
+    border-radius: 4px;
+    padding-left: 1rem;
+}
